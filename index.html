@@ -9,34 +9,26 @@
 </head>
 <body>
     <h1>This is the library. Store your books here:</h1>
-    <div class="books-shelf">
-        <div class="book">
-            <h2 class="book-title">Title</h2>
-            <p class="book-description">Description</p>
-        </div>
-        <div class="book">
-            <h2 class="book-title">Title</h2>
-            <p class="book-description">Description</p>
-        </div>
-        <div class="book">
-            <h2 class="book-title">Title</h2>
-            <p class="book-description">Description</p>
-        </div>
-        <div class="book">
-            <h2 class="book-title">Title</h2>
-            <p class="book-description">Description</p>
-        </div>
-        <div class="book">
-            <h2 class="book-title">Title</h2>
-            <p class="book-description">Description</p>
-        </div>
-        <div class="book">
-            <h2 class="book-title">Title</h2>
-            <p class="book-description">Description</p>
-        </div>
-    </div>
+    <div class="books-shelf"></div>
     <button>
         Add a book
     </button>
+    <form class="popup" id="popupForm">
+        <div>
+            <label for="btitle">Book title:</label>
+            <input type="text" id="btitle">
+        </div>
+
+        <br>
+
+        <div>
+            <label for="bdetails">Book details:</label>
+            <input type="text" id="bdetails">
+        </div>
+        <br>
+        <button class="add-book">Add the book</button>
+    </form>
+
+    <script src="index.js"></script>
 </body>
 </html>
