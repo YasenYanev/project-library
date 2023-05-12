@@ -1,6 +1,10 @@
-const btitle = document.getElementById("btitle")
-const bdetails = document.getElementById("bdetails")
-const bshelf = document.querySelector(".books-shelf")
+const bTitle = document.getElementById("btitle")
+const bDetails = document.getElementById("bdetails")
+const bShelf = document.querySelector(".books-shelf")
+const popUpForm = document.getElementById("popupForm")
+const addBookButton = document.getElementById("bookFormBtn")
+const closePopUp = document.querySelector(".close-popup")
+
 
 class Book {
     constructor(title, details) {
@@ -13,22 +17,33 @@ class Book {
 
 let myLibrary = []
 
-document.querySelector(".add-book").addEventListener("click", (e) => {
-    let book = new Book(btitle.value, bdetails.value)
-    myLibrary.push(book)
-    display()
-    e.preventDefault()
-    document.getElementById("popupForm").reset()
-    console.log(myLibrary)
+
+addBookButton.addEventListener("click", () => {
+    popUpForm.style.display = "block"
+    gsap.to(".popup", {y: -60, duration: 1.5})
 })
 
 
-function display() {
-    bshelf.innerHTML = ""
+const display = function () {
+    bShelf.innerHTML = ""
     myLibrary.forEach(book => {
-    bshelf.innerHTML += `
+    bShelf.innerHTML += `
             <div class="book">
                 <h2 class="book-title">${book.title}</h2>
                 <p class="book-description">${book.details}</p>
             </div>`})
 }
+
+document.querySelector(".add-book").addEventListener("click", (e) => {
+    let book = new Book(bTitle.value, bDetails.value)
+    myLibrary.push(book)
+    display()
+    e.preventDefault()
+    popUpForm.reset()
+    console.log(myLibrary)
+})
+
+closePopUp.addEventListener("click", () => {
+    popUpForm.style.display = "none"
+    gsap.to(".popup", {y: 0, duration: 1.5})
+})
