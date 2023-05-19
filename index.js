@@ -1,11 +1,15 @@
+// const variables
 const bTitle = document.getElementById("btitle")
 const bDetails = document.getElementById("bdetails")
-const bShelf = document.querySelector(".books-shelf")
+const bShelf = document.getElementById("books-shelf")
+const formBtn = document.getElementById("bookFormBtn")
 const popUpForm = document.getElementById("popupForm")
-const addBookButton = document.getElementById("bookFormBtn")
-const closePopUp = document.querySelector(".close-popup")
+const closeFormPopUp = document.getElementById("close-popup")
+const errorPopUp = document.getElementById("error")
+const closeErrorPopUp = document.getElementById("close-error-popup")
+const addBookBtn = document.getElementById("addBook")
 
-
+// class
 class Book {
     constructor(title, details) {
         this.title = title
@@ -14,17 +18,11 @@ class Book {
 
 
 }
-
+// arrays
 let myLibrary = []
 
-
-addBookButton.addEventListener("click", () => {
-    popUpForm.style.display = "block"
-    gsap.to(".popup", {y: -60, duration: 1.5})
-})
-
-
-const display = function () {
+// functions
+function display() {
     bShelf.innerHTML = ""
     myLibrary.forEach(book => {
     bShelf.innerHTML += `
@@ -34,7 +32,19 @@ const display = function () {
             </div>`})
 }
 
-document.querySelector(".add-book").addEventListener("click", (e) => {
+// event listeners and functions
+formBtn.addEventListener("click", () => {
+    popUpForm.style.display = "block"
+    gsap.to(".popup", {y: -60, duration: 1.5})
+})
+
+addBookBtn.addEventListener("click", (e) => {
+    if (bTitle.value === "" || null) {
+        errorPopUp.style.display = "block"
+    }
+    if (bDetails.value === "" || null) {
+        errorPopUp.style.display = "block"
+    }
     let book = new Book(bTitle.value, bDetails.value)
     myLibrary.push(book)
     display()
@@ -43,7 +53,12 @@ document.querySelector(".add-book").addEventListener("click", (e) => {
     console.log(myLibrary)
 })
 
-closePopUp.addEventListener("click", () => {
+closeFormPopUp.addEventListener("click", () => {
     popUpForm.style.display = "none"
     gsap.to(".popup", {y: 0, duration: 1.5})
+    popUpForm.reset()
+})
+
+closeErrorPopUp.addEventListener("click", () => {
+    errorPopUp.style.display = "none"
 })
